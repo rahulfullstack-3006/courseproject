@@ -1,0 +1,268 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+      <h1 style="color: white;">ILLUME </h1>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+      <div class="save_next">
+        <button type="submit" class="btn btn-primary">Save & Next</button>
+        <button class="btn btn-primary m-1" (click)="goBack()">Back</button>
+      </div>
+  
+      <div class="row">
+  
+        <div class="col-6">
+          <div class="row m-3">
+            <h5>General Details</h5>
+          </div>
+  
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Course Image</label>
+            <div class="image_preview">
+              <!-- <img src="assets/images/courseicon.jpg" alt="courseicon" style="width: 300px;height: 170px;"> -->
+              <div class="icon_upload_image">
+                <input type="file" #fileInput accept="image/" formControlName="image" (change)="uploadFile($event)" />
+              
+  
+                <!-- <input accept=".png,.jpg,.jpeg" id="imageUpload" style="display: none;" type="file" class="ng-untouched ng-pristine ng-valid" formControlName="image" (onchange)="onFileChange($event, 'image')"/>    -->
+  
+                <!-- <label class="side-form-label" for="imageUpload" title="Change Thumbnail">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                  
+                </label>          -->
+              </div>
+              <div class="avatar-preview">
+                <div class="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+                </div>
+              </div>
+  
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Course Code</label>
+            <input type="text" class="form-control" formControlName="course_code" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Course Name</label><span class="error">*</span>
+            <input type="email" class="form-control" formControlName="course_name" aria-describedby="emailHelp" [ngClass]="{ 'is-invalid': submitted && f.course_name.errors }">
+            <div *ngIf="submitted && f.course_name.errors" class="invalid-feedback">
+              <div *ngIf="f.course_name.errors.required">Course Name is required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Learning Category</label>
+            <angular2-multiselect [data]="dropdownList" formControlName="selectedItems1" [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+              (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Type Of Program</label>
+            <angular2-multiselect [data]="dropdownList" formControlName="selectedItems2" [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+              (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Visibility</label><span class="error">*</span>
+            <select class="form-select" formControlName="visibility"
+              [ngClass]="{ 'is-invalid': submitted && f.visibility.errors }">
+              <option value="" selected disabled>Select Type</option>
+              <option value="1">Show</option>
+              <option value="2">Hide</option>
+            </select>
+            <div *ngIf="submitted && f.visibility.errors" class="invalid-feedback">
+              <div *ngIf="f.visibility.errors.required">visibility is required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Summary</label>
+            <textarea class="form-control" formControlName="summary" cols="30" id="summary" minlength="1" name="summary"
+              pattern=".{1,500}" placeholder="Min 1 and Max 500 characters." rows="6"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Tags</label>
+            <angular2-multiselect [data]="dropdownList" formControlName="selectedItems3" [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+              (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+          </div>
+  
+        </div>
+  
+        <div class="col-6">
+          <div class="row m-3">
+            <h5>Advanced Options</h5>
+          </div>
+  
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Course Level</label><span class="error">*</span>
+            <select class="form-select" formControlName="course_level" [ngClass]="{ 'is-invalid': submitted && f.course_level.errors }">
+              <option value="" selected disabled>Select Level</option>
+              <option value="1">Beginner</option>
+              <option value="2">Intermediate</option>
+              <option value="3">Advanced</option>
+              <option value="4">01-12-2020</option>
+  
+            </select>
+            <div *ngIf="submitted && f.course_level.errors" class="invalid-feedback">
+              <div *ngIf="f.course_level.errors.required">Course Level required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Course Completion Days (In Days)</label><span
+              class="error">*</span>
+            <input type="text" class="form-control" formControlName="course_completion" aria-describedby="emailHelp" [ngClass]="{ 'is-invalid': submitted && f.course_completion.errors }">
+            <div *ngIf="submitted && f.course_completion.errors" class="invalid-feedback">
+              <div *ngIf="f.course_completion.errors.required">Course Completion Days required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Course Type</label><span class="error">*</span>
+            <select class="form-select" formControlName="course_type"  [ngClass]="{ 'is-invalid': submitted && f.course_type.errors }">
+              <option value="" selected disabled>Select Course Type</option>
+              <option value="1">Online</option>
+              <option value="8">Profile access course</option>
+            </select>
+            <div *ngIf="submitted && f.course_type.errors" class="invalid-feedback">
+              <div *ngIf="f.course_type.errors.required">Course type required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Open To</label><span class="error">*</span>
+            <div class="form-check">
+              <input class="form-check-input" type="radio"  value="open" formControlName="flexRadioDefault" id="flexRadioDefault1"  [ngClass]="{ 'is-invalid': submitted && f.flexRadioDefault.errors }">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Open
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio"  value="discrete"  formControlName="flexRadioDefault" id="flexRadioDefault2"
+                checked  [ngClass]="{ 'is-invalid': submitted && f.flexRadioDefault.errors }">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Discrete
+              </label>
+            </div>
+            <div *ngIf="submitted && f.flexRadioDefault.errors" class="invalid-feedback">
+              <div *ngIf="f.flexRadioDefault.errors.required">Open To required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Course Manager </label><span class="error">*</span>
+            <angular2-multiselect [data]="dropdownList"  [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+              (onDeSelectAll)="onDeSelectAll($event)" formControlName="selectedItems4" [ngClass]="{ 'is-invalid': submitted && f.flexRadioDefault.errors }">
+            </angular2-multiselect>
+  
+              <div *ngIf="submitted && f.selectedItems4.errors" class="invalid-feedback">
+                <div *ngIf="f.selectedItems4.errors.required">Course Manager required</div>
+              </div>
+          </div>
+  
+  
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"> Course Completion Points </label><span
+              class="error">*</span>
+            <div class="text-end-content">
+              <button (click)="onAdd()">Add</button>
+            </div>
+  
+            <div class="row">
+              <form [formGroup]="formData">
+                <div formArrayName="users" *ngFor="let item of formData.get('users')['controls']; let i = index;">
+  
+                  <div [formGroupName]="i">
+                    <div class="row">
+                      <div class="col-2">
+                        <label>Role</label><span class="error">*</span>
+                        <select formControlName="select_role">
+                          <option selected>Select</option>
+                          <option value="1">Learner</option>
+                          <option value="2">Manager</option>
+                        </select>
+                        <!-- <div *ngIf="submitted && f.select_role.errors" class="invalid-feedback">
+                          <div *ngIf="f.select_role.errors.required">Role required</div>
+                        </div> -->
+                      </div>
+                      <div class="col-2">
+                        <label>Credit </label><span class="error">*</span>
+                        <select formControlName="select_credit">
+                          <option selected>Type</option>
+                          <option value="1">Points</option>
+                          <option value="2">%</option>
+                        </select>
+                        <!-- <div *ngIf="submitted && f.select_credit.errors" class="invalid-feedback">
+                          <div *ngIf="f.select_credit.errors.required">Credit required</div>
+                        </div> -->
+                      </div>
+                      <div class="col-2">
+                        <label>Before</label><span class="error">*</span>
+                        <input type="text" formControlName="before" />
+                        <!-- <div *ngIf="submitted && f.before.errors" class="invalid-feedback">
+                          <div *ngIf="f.before.errors.required">Before required</div>
+                        </div> -->
+                      </div>
+                      <div class="col-2">
+                        <label>After</label><span class="error">*</span>
+                        <input type="text" formControlName="after" />
+                        <!-- <div *ngIf="submitted && f.after.errors" class="invalid-feedback">
+                          <div *ngIf="f.after.errors.required">After required</div>
+                        </div> -->
+                      </div>
+  
+                      <div class="form-group no-margin">
+                        <span class="glyphicon glyphicon remove pull-right paraRemove fa fa-times"
+                         (click)="removeAdd(i)"></span>
+                        </div>
+                    </div>
+                  </div>
+  
+                </div>
+              </form>
+            </div>
+  
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"> Course Valid From Date </label><span
+              class="error">*</span>
+               <input type="text" class="form-control" placeholder="Select from date"
+           name="course_validFromDate" formControlName="course_validFromDate"  #dp="bsDatepicker"
+           bsDatepicker [bsConfig]="{containerClass:'theme-blue',dateInputFormat: 'YYYY-MM-DD' }"
+           [ngClass]="{'is-invalid':f.course_validFromDate.touched && f.course_validFromDate.errors}"/>
+                  
+              <div *ngIf="submitted && f.course_validFromDate.errors" class="invalid-feedback">
+                <div *ngIf="f.course_validFromDate.errors.required">From Date required</div>
+              </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"> Course Valid To Date </label><span class="error">*</span>
+              <input type="text" class="form-control" placeholder="Select to date"
+              name="course_validFromDate" formControlName="course_validToDate"
+              bsDatepicker [bsConfig]="{containerClass:'theme-blue',dateInputFormat: 'YYYY-MM-DD' }"
+              [ngClass]="{'is-invalid':f.course_validFromDate.touched && f.course_validFromDate.errors}"/>
+              <div *ngIf="submitted && f.course_validToDate.errors" class="invalid-feedback">
+                <div *ngIf="f.course_validToDate.errors.required"> To Date required</div>
+              </div>
+          </div>
+          <div class="mb-3">
+            <input type="checkbox" value="checkData" formControlName="checkwether">
+            <span class="p-1">Whether Course Needs To Be Validated</span>
+          </div>
+          <div class="mb-3">
+            <div>
+              <label for="exampleInputEmail1" class="form-label"> Course Url </label>
+            </div>
+            <input type="text" formControlName="course_url" aria-describedby="emailHelp">
+            <button class="btn btn-primary">GENERATE</button>
+          </div>
+  
+  
+        </div>
+      </div>
+    </form>
+  
+  
+  
+  
+  
+  
+  </div>

@@ -1,0 +1,25 @@
+.col-6{
+    box-sizing: border-box;
+}
+
+
+.avatar-preview{
+    width: 300px;
+    height: 170px;
+}
+
+.imagePreview{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.save_next{
+    text-align: end;
+    padding: 20px;
+}
+
+.error{
+    color: red;
+}

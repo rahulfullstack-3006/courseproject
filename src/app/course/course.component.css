@@ -1,0 +1,17 @@
+.search{
+    text-align: end;
+    
+}
+.ng-star{
+    margin:4px;
+    padding: 3px 8px;
+}
+
+.tags {
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 24px;
+    padding: 0 12px;
+    margin-right: 12px;
+
+}

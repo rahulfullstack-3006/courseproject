@@ -1,0 +1,127 @@
+
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+      <h1 style="color: white;">ILLUME </h1>
+    </div>
+  </nav>
+
+<div class="container">
+    <div class="row p-2">
+        <div class="col-6">
+            <h5>Learning /Online Course</h5>    
+        </div>
+        <div class="col-6">
+          <!-- using angular2-search-filter -->
+            <!-- <div [formGroup]="searchForm"> -->
+                <input  type="search"  [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching">
+              <!-- </div> -->
+             
+              <!-- using pipe -->
+              <!-- <input  type="search"  [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching">  -->
+                
+                <button class="btn btn-primary m-2" (click)="onFilterClick()">Filter</button>
+                <div *ngIf="filterClick">
+                  <input  type="search" [(ngModel)]="searchTag" autocomplete="off" placeholder="Search">
+
+                  <button class="btn btn-primary m-2" (click)="clearClick()">CLEAR</button>
+
+                  <button  class="btn btn-primary m-1" (click)="onTagClick()">Tags</button>
+                  <ng-container *ngIf="showTagClick" class="ng-star">
+                  <div *ngIf="showTagClick">
+
+                    <div class="tags" *ngFor="let tag of tags | filter:searchTag">
+                      <span>{{tag.tagname}}</span>
+                    </div>
+                  </div>
+                 </ng-container>
+                  
+                  <button class="btn btn-primary m-1" (click)="onCourseClick()">Course Level</button>
+                  <!-- <ng-container *ngFor="let hero of courseContent | filter:searchText">
+                    <div class="col-3 pr-2 mb-3">
+                        <div class="card" >
+                            <img class="card-img-top" src='https://devadmin.edgelearning.co.in/assets/images/courseicon.jpg' alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">{{hero.course_name}}</h5>
+                              <p class="card-text">Completed/Enrolled : 0 / 0</p>
+                              <p class="card-text">Manager : Ysdf Test</p>
+                              <p class="card-text">WorkFlow : NA</p>
+                              <p class="card-text">{{hero.course_completion}}</p>
+                              <p class="card-text">{{hero.course_type}}</p>
+                              <button class="btn btn-primary" (click)="onEdit(hero)">Edit</button>
+                            </div>
+                          </div>
+                        </div>
+                    </ng-container> -->
+                 
+                  <button class="btn btn-primary m-1"  (click)="onManagerClick()">Manager</button>
+                  <ng-container *ngIf="showManagerClick" class="ng-star">
+                  <div *ngIf="showManagerClick">
+                    <div class="tags" *ngFor="let manager of managers | filter:searchTag">
+                      <span>{{manager.managername}}</span>
+                    </div>
+                    </div>
+                 </ng-container>
+                  <button class="btn btn-primary m-1" (click)="onWorksClick()">Workflows</button>
+                  <ng-container *ngIf="showWorkflowsClick" class="ng-star">
+                  <div *ngIf="showWorkflowsClick">
+                    <div class="tags" *ngFor="let workflow of workflows | filter:searchTag">
+                      <span>{{workflow.workflowname}}</span>
+                    </div>
+                    </div>
+                 </ng-container>
+
+                <!-- <button class="btn btn-primary m-2" (click)="sortAsc()">ASC</button>
+                <button class="btn btn-primary" (click)="sortDec()">DESC</button> -->
+
+                </div>
+                <button class="btn btn-primary m-2" (click)="addCourse()">Add Course</button>
+
+              
+    </div>
+    {{searchText}}
+  
+
+    </div>
+
+    <div class="row">
+      <!-- using pipe -->
+
+      <!-- <ng-container *ngFor="let hero of heroes | filter:searchText">
+        <div class="col-3 pr-2 mb-3">
+            <div class="card" >
+                <img class="card-img-top" src='https://devadmin.edgelearning.co.in/assets/images/courseicon.jpg' alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{hero.course_name}}</h5>
+                  <p class="card-text">Completed/Enrolled : 0 / 0</p>
+                  <p class="card-text">Manager : Ysdf Test</p>
+                  <p class="card-text">WorkFlow : NA</p>
+                  <p class="card-text">{{hero.course_completion}}</p>
+                  <p class="card-text">{{hero.course_type}}</p>
+                  <button class="btn btn-primary" (click)="onEdit(hero)">Edit</button>
+                </div>
+              </div>
+            </div>
+        </ng-container> -->
+
+        <!-- using angular2-search-filter -->
+        <ng-container *ngFor="let hero of courseContent | filter:searchText">
+        <div class="col-3 pr-2 mb-3">
+            <div class="card" >
+                <img class="card-img-top" src='https://devadmin.edgelearning.co.in/assets/images/courseicon.jpg' alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{hero.course_name}}</h5>
+                  <p class="card-text">Completed/Enrolled : 0 / 0</p>
+                  <p class="card-text">Manager : Ysdf Test</p>
+                  <p class="card-text">WorkFlow : NA</p>
+                  <p class="card-text">{{hero.course_completion}}</p>
+                  <p class="card-text">{{hero.course_type}}</p>
+                  <button class="btn btn-primary" (click)="onEdit(hero)">Edit</button>
+                </div>
+              </div>
+            </div>
+        </ng-container>
+        
+
+    </div>
+</div>
+
