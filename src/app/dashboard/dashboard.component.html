@@ -119,6 +119,7 @@
             <div *ngIf="f.course_completion.errors.required">Course Completion Days required</div>
           </div>
         </div>
+        
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Course Type</label><span class="error">*</span>
           <select class="form-select" formControlName="course_type"  [ngClass]="{ 'is-invalid': submitted && f.course_type.errors }">
